@@ -15,8 +15,8 @@ export default function Home() {
 
   const handleAddProduct = async () => {
     const newProduct = {
-      name: 'New Product',
-      description: 'This is a new product',
+      name: 'Produto teste',
+      description: 'Esse é um produto',
       price: 100,
       quantity: 10,
     };
@@ -25,8 +25,8 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>Product Inventory</h1>
+    <div className='items-center'>
+      <h1>Estoque</h1>
       <ul>
         {products.map((product) => (
           <li key={product.id}>
@@ -35,7 +35,6 @@ export default function Home() {
         ))}
       </ul>
       <button onClick={handleAddProduct}>Add Product</button>
-      {/* Adicione mais funcionalidades conforme necessário */}
     </div>
   );
 }
