@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Gabriel/Estudos/UFRJ/Fluxo/Lua Negra",
-      "program": "d:/Gabriel/Estudos/UFRJ/Fluxo/Lua Negra/build/Debug/outDebug",
+      "cwd": "d:/Gabriel/Estudos/UFRJ/Maratona/CSES",
+      "program": "d:/Gabriel/Estudos/UFRJ/Maratona/CSES/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
