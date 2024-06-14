@@ -7,7 +7,7 @@ export class ProductsService {
   private products = [];
 
   create(createProductDto: CreateProductDto) {
-    const product = { id: Date.now(), ...createProductDto };
+    const product = { ...createProductDto };
     this.products.push(product);
     return product;
   }
