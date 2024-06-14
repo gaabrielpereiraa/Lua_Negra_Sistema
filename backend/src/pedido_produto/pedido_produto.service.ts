@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePedidoProdutoDto } from './dto/create-pedido_produto.dto';
 import { UpdatePedidoProdutoDto } from './dto/update-pedido_produto.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PedidoProdutoService {
-  create(createPedidoProdutoDto: CreatePedidoProdutoDto) {
-    return 'This action adds a new pedidoProduto';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(data: CreatePedidoProdutoDto) {
+    const pedidoProdutoCriado = await this.prisma.pedidoProduto.create({ data });
+    return pedidoProdutoCriado;
   }
 
-  findAll() {
-    return `This action returns all pedidoProduto`;
+  async findAll() {
+    const pedidoProdutos = await this.prisma.pedidoProduto.findMany();
+    return pedidoProdutos;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pedidoProduto`;
+  async findOne(id: number) {
+    const pedidoProduto = await this.prisma.pedidoProduto.findUnique({ where: { id } });
+    return pedidoProduto;
   }
 
-  update(id: number, updatePedidoProdutoDto: UpdatePedidoProdutoDto) {
-    return `This action updates a #${id} pedidoProduto`;
+  async update(id: number, updatePedidoProdutoDto: UpdatePedidoProdutoDto) {
+    const pedidoProdutoAtualizado = await this.prisma.pedidoProduto.update({
+      where: {id}, 
+      data: updatePedidoProdutoDto
+    });
+    return pedidoProdutoAtualizado;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pedidoProduto`;
+  async remove(id: number) {
+    await this.prisma.pedidoProduto.delete({ where:{ id } });  
+    return 'Produto removido com sucesso!';
   }
 }
