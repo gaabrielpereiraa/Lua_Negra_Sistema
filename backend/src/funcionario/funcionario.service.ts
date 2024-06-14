@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFuncionarioDto } from './dto/create-funcionario.dto';
 import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
+import { PrismaClient } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class FuncionarioService {
-  create(createFuncionarioDto: CreateFuncionarioDto) {
-    return 'This action adds a new funcionario';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(data: CreateFuncionarioDto) {
+    const funcionarioCriado = await this.prisma.funcionario.create( { data } );
+    return funcionarioCriado;
   }
 
-  findAll() {
-    return `This action returns all funcionario`;
+  async findAll() {
+    const funcionarios = await this.prisma.funcionario.findMany();
+    return funcionarios;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} funcionario`;
+  async findOne(id: number) {
+    const funcionario = await this.prisma.funcionario.findUnique({ where: { id } });
+    return funcionario;
   }
 
-  update(id: number, updateFuncionarioDto: UpdateFuncionarioDto) {
-    return `This action updates a #${id} funcionario`;
+  async update(id: number, updateFuncionarioDto: UpdateFuncionarioDto) {
+    const funcionarioAtualizado = await this.prisma.funcionario.update({
+      where: {id}, 
+      data: updateFuncionarioDto
+    });
+    return funcionarioAtualizado;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} funcionario`;
+  async remove(id: number) {
+    await this.prisma.funcionario.delete({ where:{ id } });  
+    return 'Funcionário removido com sucesso!';
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { getProducts, createProduct, updateProduct, deleteProduct } from '../app/services/api';
+import { getProducts, createProduct, updateProduct, deleteProduct } from './services/api';
+import ProductForm from './components/ProductForm';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -13,28 +14,17 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  const handleAddProduct = async () => {
-    const newProduct = {
-      name: 'Produto teste',
-      description: 'Esse é um produto',
-      price: 100,
-      quantity: 10,
-    };
-    const createdProduct = await createProduct(newProduct);
-    setProducts([...products, createdProduct]);
-  };
-
   return (
-    <div className='items-center'>
+    <div className='container mx-auto p-4 bg-black'>
       <h1>Estoque</h1>
+      <ProductForm />
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            {product.name} - {product.quantity}
+            {product.nome_produto} - {product.estoque} - {product.preco}
           </li>
         ))}
       </ul>
-      <button onClick={handleAddProduct}>Add Product</button>
     </div>
   );
 }

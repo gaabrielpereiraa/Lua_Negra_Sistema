@@ -19,7 +19,6 @@ model Produto {
   descricao String
   estoque Int
   preco Float
-  validade DateTime
   pedido_produto PedidoProduto[]
 }
 
@@ -27,7 +26,7 @@ model Pedido {
   id Int @id @default(autoincrement())
   id_funcionario Int
   funcionario Funcionario @relation(fields: [id_funcionario], references: [id])
-  data_do_pedido DateTime
+  data_do_pedido DateTime?
   status_do_pedido String
   id_produto Int
   pedido_produto PedidoProduto[]
